@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  paper:
+    image: marctv/minecraft-papermc-server:1.19
+    restart: always
+    container_name: papermc
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      MEMORYSIZE: "4G"
+      PAPERMC_FLAGS: ""
+    volumes:
+      - "./.docker/:/data:rw"
+    ports:
+      - "25565:25565"
+    stdin_open: true
+    tty: true
