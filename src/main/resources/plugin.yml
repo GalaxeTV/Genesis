@@ -1,0 +1,4 @@
+name: genesis
+version: '${version}'
+main: tv.galaxe.genesis.Genesis
+api-version: '1.19'
