@@ -36,8 +36,8 @@ public class GenesisGUI implements CommandExecutor {
           ItemBuilder.from(Material.PURPLE_STAINED_GLASS_PANE).asGuiItem()
       ));
 
-
+      genesis.open(player);
+      return true;
     }
-    return false;
   }
 }
