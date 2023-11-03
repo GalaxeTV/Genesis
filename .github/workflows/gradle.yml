@@ -1,0 +1,73 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Change Gradle Permissions
+      run: chmod +x gradlew
+    - name: Setup Gradle to generate and submit dependency graphs
+      uses: gradle/gradle-build-action@v2.6.0
+      with:
+        dependency-graph: generate-and-submit
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@v2.8.0
+      with:
+        arguments: build
+    - name: Shadow Jar
+      uses: gradle/gradle-build-action@v2.8.0
+      with:
+        arguments: shadowJar
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Genesis
+        path: build/libs/*.jar
+        if-no-files-found: error
+  deploy:
+    needs: build
+    name: Deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: Genesis
+          path: build/libs/
+      - name: Deploy to SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ${{ secrets.DEV_HOST }}
+          username: ${{ secrets.DEV_USERNAME }}
+          password: ${{ secrets.DEV_PASSWORD }}
+          port: ${{ secrets.DEV_PORT }}
+          local_path: 'build/libs/*'
+          remote_path: '/plugins/'
+          sftp_only: true
