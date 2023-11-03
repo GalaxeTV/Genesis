@@ -1,4 +1,13 @@
 name: genesis
 version: '${version}'
-main: tv.galaxe.genesis.Genesis
-api-version: '1.19'
+main: tv.galaxe.genesis.Core
+api-version: 1.19
+authors: [ garrettsummerfi3ld, josefbaltz ]
+description: A Minecraft server plugin inspired by the Origins mod.
+website: https://github.com/GalaxeTV/genesis
+commands:
+  genesis:
+    description: Genesis Help Menu
+    usage: /genesis
+    aliases: [gen, g]
+    default: true
