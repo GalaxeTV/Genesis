@@ -11,3 +11,6 @@ commands:
     usage: /genesis
     aliases: [gen, g]
     default: true
+permissions:
+  genesis.genus.skeleton:
+    description: Permission indicating the player has chosen the skeleton genus.
