@@ -3,7 +3,7 @@ package tv.galaxe.genesis.runnable;
 import org.bukkit.entity.Player;
 
 public class SkeletonRunnable implements Runnable {
-	private final Player player;
+	private Player player;
 
 	public SkeletonRunnable(Player p) {
 		this.player = p;
@@ -11,6 +11,9 @@ public class SkeletonRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO: Checks to perform while player is online
+		if (player.getWorld().isDayTime() && player.getInventory().getHelmet() == null
+				&& !(player.getLocation().getBlock().getRelative(0, 1, 0).getLightFromSky() < 15)) {
+			player.setFireTicks(60);
+		}
 	}
 }
