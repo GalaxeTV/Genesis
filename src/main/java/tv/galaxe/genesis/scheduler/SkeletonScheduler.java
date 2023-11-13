@@ -1,4 +1,4 @@
-package tv.galaxe.genesis.runnable;
+package tv.galaxe.genesis.scheduler;
 
 import java.util.function.Consumer;
 import org.bukkit.entity.Player;
