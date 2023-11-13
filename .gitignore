@@ -119,3 +119,9 @@ run/
 
 # Docker
 .docker/
+
+# Visual Studio Code
+.vscode/
+
+# IntelliJ
+.idea/
