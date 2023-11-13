@@ -3,7 +3,7 @@ services:
   paper:
     image: marctv/minecraft-papermc-server:1.20
     restart: always
-    container_name: genesis_dev
+    container_name: papermc
     environment:
       PUID: "1000"
       PGID: "1000"
