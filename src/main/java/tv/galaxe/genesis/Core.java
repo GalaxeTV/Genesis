@@ -3,8 +3,6 @@ package tv.galaxe.genesis;
 import org.bukkit.plugin.java.JavaPlugin;
 import tv.galaxe.genesis.cmd.GenesisGUI;
 
-import java.util.logging.Level;
-
 public final class Core extends JavaPlugin {
 
     @Override
