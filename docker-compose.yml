@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   paper:
-    image: marctv/minecraft-papermc-server:1.20.2
+    image: marctv/minecraft-papermc-server:latest
     restart: always
     container_name: papermc
     environment:
