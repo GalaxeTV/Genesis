@@ -11,7 +11,9 @@ public class SkeletonRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		player.sendMessage("Your Runnable is active!");
-		player.getServer().getLogger().info(player.getName() + "'s Runnable is active!");
+		if (player.getWorld().isDayTime() && player.getInventory().getHelmet() == null
+				&& !(player.getLocation().getBlock().getRelative(0, 1, 0).getLightFromSky() < 15)) {
+			player.setFireTicks(60);
+		}
 	}
 }
