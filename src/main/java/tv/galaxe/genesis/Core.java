@@ -1,23 +1,25 @@
 package tv.galaxe.genesis;
 
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import tv.galaxe.genesis.cmd.GenesisGUI;
+import tv.galaxe.genesis.event.PlayerConnected;
 
-public final class Core extends JavaPlugin {
-
+public final class Core extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        getServer().getConsoleSender().sendMessage("Genesis has been enabled!");
+        getServer().getConsoleSender().sendMessage("Genesis Plugin Enabled");
         saveDefaultConfig();
 
         // Commands
         getCommand("genesis").setExecutor(new GenesisGUI());
+
+        // Listeners
+        getServer().getPluginManager().registerEvents(new PlayerConnected(), this);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
-        getServer().getConsoleSender().sendMessage("Genesis has been disabled!");
+        getServer().getConsoleSender().sendMessage("Genesis Plugin Disabled");
     }
 }
