@@ -3,7 +3,7 @@ package tv.galaxe.genesis.runnable;
 import org.bukkit.entity.Player;
 
 public class SkeletonRunnable implements Runnable {
-	private final Player player;
+	private Player player;
 
 	public SkeletonRunnable(Player p) {
 		this.player = p;
@@ -11,6 +11,7 @@ public class SkeletonRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO: Checks to perform while player is online
+		player.sendMessage("Your Runnable is active!");
+		player.getServer().getLogger().info(player.getName() + "'s Runnable is active!");
 	}
 }
