@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -27,7 +31,7 @@ public final class Skeleton implements Listener {
 		if (event.getPlayer().hasPermission("genesis.genus.skeleton")) {
 			taskMap.put(event.getPlayer(), plugin.getServer().getScheduler().runTaskTimer(plugin,
 					new SkeletonRunnable((Player) event.getPlayer()), 0, 20));
-            event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(16.0);
+			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(16.0);
 		}
 	}
 
@@ -47,4 +51,14 @@ public final class Skeleton implements Listener {
 			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 300, 1));
 		}
 	}
+
+	@EventHandler
+	public void onShootBowDamage(EntityDamageByEntityEvent event) {
+		if (event.getDamager() instanceof AbstractArrow // Prevent errors by checking if the Damager is an AbstractArrow
+				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter()).hasPermission("genesis.genus.skeleton")
+				&& !(event.getDamager() instanceof Trident)) {
+			event.setDamage(event.getDamage() * 1.5);
+		}
+	}
+
 }
