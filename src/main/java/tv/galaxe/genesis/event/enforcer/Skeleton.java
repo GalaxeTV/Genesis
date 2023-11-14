@@ -5,12 +5,15 @@ import java.util.Map;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.AbstractSkeleton;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -61,4 +64,11 @@ public final class Skeleton implements Listener {
 		}
 	}
 
+	@EventHandler
+	public void onUndeadMobTarget(EntityTargetLivingEntityEvent event) {
+		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.genus.skeleton")
+				&& (event.getEntity() instanceof AbstractSkeleton || event.getEntity() instanceof Zombie)) {
+			event.setCancelled(true);
+		}
+	}
 }

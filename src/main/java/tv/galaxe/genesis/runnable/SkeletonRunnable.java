@@ -11,8 +11,9 @@ public class SkeletonRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		if (player.getWorld().isDayTime() && player.getInventory().getHelmet() == null
-				&& !(player.getLocation().getBlock().getRelative(0, 1, 0).getLightFromSky() < 15)) {
+		if (player.getWorld().isDayTime()
+				&& !(player.getLocation().getBlock().getLightFromSky() < 15)
+				&& player.getEquipment().getHelmet() == null) {
 			player.setFireTicks(60);
 		}
 	}
