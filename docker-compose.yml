@@ -1,9 +1,9 @@
 version: "3.9"
 services:
   paper:
-    image: marctv/minecraft-papermc-server:1.20
+    image: marctv/minecraft-papermc-server:latest
     restart: always
-    container_name: genesis_dev
+    container_name: papermc
     environment:
       PUID: "1000"
       PGID: "1000"
