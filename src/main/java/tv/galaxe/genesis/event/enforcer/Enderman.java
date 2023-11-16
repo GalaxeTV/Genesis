@@ -11,6 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
@@ -42,30 +43,38 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void actionKey(PlayerSwapHandItemsEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")
-				&& cooldownMap.getOrDefault(event.getPlayer(), Instant.now().minusSeconds(1)).isBefore(Instant.now())) {
-			event.setCancelled(true);
-			event.getPlayer().launchProjectile(EnderPearl.class);
-			cooldownMap.put(event.getPlayer(), Instant.now().plusSeconds(30));
-		} else {
-			event.setCancelled(true);
-			event.getPlayer()
-					.sendActionBar(Component
-							.text("You can use this ability in ")
-                            .append(Component.text(String.format("%.1f",
-													ChronoUnit.MILLIS.between(Instant.now(),
-													cooldownMap.get(event.getPlayer())) / 1000.0)))
-							.append(Component.text(" seconds!")));
+		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
+			if (cooldownMap.getOrDefault(event.getPlayer(), Instant.now().minusSeconds(1)).isBefore(Instant.now())) {
+				event.setCancelled(true);
+				event.getPlayer().launchProjectile(EnderPearl.class);
+				cooldownMap.put(event.getPlayer(), Instant.now().plusSeconds(30));
+			} else {
+				event.setCancelled(true);
+				event.getPlayer()
+						.sendActionBar(Component
+								.text("You can use this ability in ")
+        	                    .append(Component.text(String.format("%.1f",
+														ChronoUnit.MILLIS.between(Instant.now(),
+														cooldownMap.get(event.getPlayer())) / 1000.0)))
+								.append(Component.text(" seconds!")));
+			}
 		}
 	}
 
 	@EventHandler
 	public void onEnderPearl(PlayerTeleportEvent event) {
-		if (event.getCause() == TeleportCause.ENDER_PEARL) {
+		if (event.getPlayer().hasPermission("genesis.genus.enderman") && event.getCause() == TeleportCause.ENDER_PEARL) {
 			event.setCancelled(true);
 			event.getPlayer().teleport(event.getTo());
 			event.getPlayer().getWorld().playSound(((Entity) event.getPlayer()), Sound.ENTITY_ENDERMAN_TELEPORT, 1.0F,
 					1.0F);
+		}
+	}
+
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent event) {
+		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
+
 		}
 	}
 }
