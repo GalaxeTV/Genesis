@@ -1,7 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
 import java.util.HashMap;
-
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.AbstractArrow;
@@ -21,7 +21,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
-
 import tv.galaxe.genesis.Core;
 import tv.galaxe.genesis.runnable.SkeletonRunnable;
 
@@ -30,7 +29,8 @@ public final class Skeleton implements Listener {
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.skeleton")) {
+		if (event.getPlayer().hasPermission("genesis.genus.skeleton")
+				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new SkeletonRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(16.0);
@@ -39,7 +39,8 @@ public final class Skeleton implements Listener {
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.skeleton")) {
+		if (event.getPlayer().hasPermission("genesis.genus.skeleton")
+				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}
@@ -47,6 +48,7 @@ public final class Skeleton implements Listener {
 	@EventHandler
 	public void onDrinkMilk(PlayerItemConsumeEvent event) {
 		if (event.getPlayer().hasPermission("genesis.genus.skeleton")
+				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
 				&& event.getItem().getType() == Material.MILK_BUCKET) {
 			event.setItem(new ItemStack(Material.BUCKET));
 			event.getPlayer().clearActivePotionEffects();
@@ -58,6 +60,7 @@ public final class Skeleton implements Listener {
 	public void onShootBowDamage(EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof AbstractArrow // Prevent errors by checking if the Damager is an AbstractArrow
 				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter()).hasPermission("genesis.genus.skeleton")
+				&& ((Player) ((AbstractArrow) event.getDamager()).getShooter()).getGameMode().equals(GameMode.SURVIVAL)
 				&& !(event.getDamager() instanceof Trident)) {
 			event.setDamage(event.getDamage() * 1.5);
 		}

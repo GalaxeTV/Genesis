@@ -1,5 +1,6 @@
 package tv.galaxe.genesis.runnable;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public final class SkeletonRunnable implements Runnable {
@@ -11,8 +12,8 @@ public final class SkeletonRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		if (player.getWorld().isDayTime() && !(player.isInWaterOrRain())
-				&& !(player.getLocation().getBlock().getLightFromSky() < 15)
+		if (player.getGameMode().equals(GameMode.SURVIVAL) && player.getWorld().isDayTime()
+				&& !(player.isInWaterOrRain()) && !(player.getLocation().getBlock().getLightFromSky() < 15)
 				&& player.getEquipment().getHelmet() == null) {
 			player.setFireTicks(60);
 		}

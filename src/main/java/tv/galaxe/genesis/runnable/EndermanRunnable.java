@@ -1,5 +1,6 @@
 package tv.galaxe.genesis.runnable;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public final class EndermanRunnable implements Runnable {
@@ -11,7 +12,8 @@ public final class EndermanRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		if ((player.isInRain() && player.getEquipment().getHelmet() == null) || player.isInWater()) {
+		if (player.getGameMode().equals(GameMode.SURVIVAL)
+				&& ((player.isInRain() && player.getEquipment().getHelmet() == null) || player.isInWater())) {
 			player.damage(0.5);
 		}
 	}
