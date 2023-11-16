@@ -1,7 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
 import java.util.HashMap;
-import java.util.Map;
+
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.AbstractArrow;
@@ -21,11 +21,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
+
 import tv.galaxe.genesis.Core;
 import tv.galaxe.genesis.runnable.SkeletonRunnable;
 
 public final class Skeleton implements Listener {
-	private static Map<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
+	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {

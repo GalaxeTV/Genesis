@@ -3,7 +3,6 @@ package tv.galaxe.genesis.event.enforcer;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
-import java.util.Map;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -22,8 +21,8 @@ import tv.galaxe.genesis.Core;
 import tv.galaxe.genesis.runnable.EndermanRunnable;
 
 public final class Enderman implements Listener {
-	private static Map<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
-	private static Map<Player, Instant> cooldownMap = new HashMap<Player, Instant>();
+	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
+	private static HashMap<Player, Instant> cooldownMap = new HashMap<Player, Instant>();
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
