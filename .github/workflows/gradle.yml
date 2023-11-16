@@ -51,7 +51,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: GalaxeSMP
+        name: Genesis
         path: build/libs/*-all.jar
         if-no-files-found: error
 
@@ -69,18 +69,15 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v3.0.2
         with:
-          name: GalaxeSMP
+          name: Genesis
           path: build/libs/
 
       - name: Deploy to Pterodactyl SFTP
-        uses: appleboy/scp-action@master
+        uses: wangyucode/sftp-upload-action@v2.0.2
         with:
           host: ${{ secrets.DEV_HOST }}
           username: ${{ secrets.DEV_USERNAME }}
           password: ${{ secrets.DEV_PASSWORD }}
           port: ${{ secrets.DEV_PORT }}
-          source: "build/libs/*.jar"
-          target: "/plugins/"
-          strip_components: 1
-          rm: true
-          timeout: 120s
+          localDir: "build/libs/"
+          remoteDir: "plugins/"
