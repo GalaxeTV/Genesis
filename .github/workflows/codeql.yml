@@ -17,8 +17,10 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
-  schedule:
-    - cron: '0 0 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}@${{ github.ref }}+${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+  cancel-in-progress: false
 
 jobs:
   analyze:
@@ -38,7 +40,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.1.1
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
