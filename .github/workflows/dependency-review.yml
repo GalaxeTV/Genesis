@@ -10,11 +10,15 @@ on: [pull_request]
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}@${{ github.ref }}+${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+  cancel-in-progress: false
+
 jobs:
   dependency-review:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repository'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
       - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v3
+        uses: actions/dependency-review-action@v3.1.2
