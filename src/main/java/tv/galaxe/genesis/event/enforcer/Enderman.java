@@ -17,20 +17,18 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import tv.galaxe.genesis.Core;
 import tv.galaxe.genesis.runnable.EndermanRunnable;
 
-public class Enderman implements Listener {
-	private Plugin plugin = Core.getInstance();
-	private Map<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
-	private Map<Player, Instant> cooldownMap = new HashMap<Player, Instant>();
+public final class Enderman implements Listener {
+	private static Map<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
+	private static Map<Player, Instant> cooldownMap = new HashMap<Player, Instant>();
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
 		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
-			taskMap.put(event.getPlayer(), plugin.getServer().getScheduler().runTaskTimer(plugin,
+			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new EndermanRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
 		}
@@ -39,7 +37,7 @@ public class Enderman implements Listener {
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
 		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
-			plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
+			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}
 

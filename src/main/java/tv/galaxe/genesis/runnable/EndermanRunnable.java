@@ -2,11 +2,11 @@ package tv.galaxe.genesis.runnable;
 
 import org.bukkit.entity.Player;
 
-public class EndermanRunnable implements Runnable {
-	private Player player;
+public final class EndermanRunnable implements Runnable {
+	private static Player player;
 
 	public EndermanRunnable(Player p) {
-		this.player = p;
+		player = p;
 	}
 
 	@Override
@@ -15,5 +15,4 @@ public class EndermanRunnable implements Runnable {
 			player.damage(0.5);
 		}
 	}
-
 }

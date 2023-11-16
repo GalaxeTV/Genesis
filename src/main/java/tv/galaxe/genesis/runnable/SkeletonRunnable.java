@@ -2,11 +2,11 @@ package tv.galaxe.genesis.runnable;
 
 import org.bukkit.entity.Player;
 
-public class SkeletonRunnable implements Runnable {
-	private Player player;
+public final class SkeletonRunnable implements Runnable {
+	private static Player player;
 
 	public SkeletonRunnable(Player p) {
-		this.player = p;
+		player = p;
 	}
 
 	@Override

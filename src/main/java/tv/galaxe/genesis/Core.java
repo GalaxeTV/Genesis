@@ -4,9 +4,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import tv.galaxe.genesis.event.enforcer.Enderman;
+// import tv.galaxe.genesis.event.enforcer.Skeleton;
 
 public final class Core extends JavaPlugin implements Listener {
-	private static Plugin plugin;
+	public static Plugin plugin;
 
 	@Override
 	public void onEnable() {
@@ -18,16 +19,12 @@ public final class Core extends JavaPlugin implements Listener {
 		// getCommand("genesis").setExecutor(new GenesisGUI());
 
 		// Genus Enforcers
-		getServer().getPluginManager().registerEvents(new Skeleton(), this);
+		// getServer().getPluginManager().registerEvents(new Skeleton(), this);
 		getServer().getPluginManager().registerEvents(new Enderman(), this);
 	}
 
 	@Override
 	public void onDisable() {
 		getServer().getConsoleSender().sendMessage("Genesis Plugin Disabled");
-	}
-
-	public static Plugin getInstance() {
-		return plugin;
 	}
 }
