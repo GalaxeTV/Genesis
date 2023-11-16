@@ -4,7 +4,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import tv.galaxe.genesis.event.enforcer.Enderman;
-// import tv.galaxe.genesis.event.enforcer.Skeleton;
+import tv.galaxe.genesis.event.enforcer.Skeleton;
 
 public final class Core extends JavaPlugin implements Listener {
 	public static Plugin plugin;
@@ -19,7 +19,7 @@ public final class Core extends JavaPlugin implements Listener {
 		// getCommand("genesis").setExecutor(new GenesisGUI());
 
 		// Genus Enforcers
-		// getServer().getPluginManager().registerEvents(new Skeleton(), this);
+		getServer().getPluginManager().registerEvents(new Skeleton(), this);
 		getServer().getPluginManager().registerEvents(new Enderman(), this);
 	}
 
