@@ -3,7 +3,7 @@ package tv.galaxe.genesis.runnable;
 import org.bukkit.entity.Player;
 
 public final class EndermanRunnable implements Runnable {
-	private static Player player;
+	private Player player;
 
 	public EndermanRunnable(Player p) {
 		player = p;
