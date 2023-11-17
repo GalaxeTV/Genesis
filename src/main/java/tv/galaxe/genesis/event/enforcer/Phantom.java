@@ -56,6 +56,7 @@ public class Phantom implements Listener {
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			event.setCancelled(true);
 			event.setUseBed(Event.Result.DENY);
+			event.getPlayer().sendMessage("Phantoms can't sleep!");
 		}
 	}
 
