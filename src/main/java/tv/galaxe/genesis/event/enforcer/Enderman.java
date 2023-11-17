@@ -32,8 +32,7 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new EndermanRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
