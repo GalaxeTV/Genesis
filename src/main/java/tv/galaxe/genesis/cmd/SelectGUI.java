@@ -7,12 +7,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerTextures;
 import tv.galaxe.genesis.Core;
@@ -30,13 +32,17 @@ public class SelectGUI implements CommandExecutor {
 
 		// Confirm Button
 		selectGUI.setItem(2, 5, new GuiItem(Material.NETHER_STAR));
-		
+
 		// Skeleton
 		selectGUI.setItem(2, 1, new GuiItem(Material.SKELETON_SKULL));
 
 		// Enderman
-		selectGUI.setItem(1, 2,
-				new GuiItem(createHead("7a59bb0a7a32965b3d90d8eafa899d1835f424509eadd4e6b709ada50b9cf")));
+		ItemStack enderman = createHead("7a59bb0a7a32965b3d90d8eafa899d1835f424509eadd4e6b709ada50b9cf");
+		ItemMeta endermanMeta = enderman.getItemMeta();
+		endermanMeta.displayName(Component.text("Enderman Class").decoration(TextDecoration.ITALIC, false));
+		enderman.setItemMeta(endermanMeta);
+		selectGUI.setItem(1, 2, new GuiItem(enderman, event -> {
+		}));
 
 		// Axolotl
 		selectGUI.setItem(2, 3,
