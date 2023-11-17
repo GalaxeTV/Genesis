@@ -1,6 +1,5 @@
 package tv.galaxe.genesis;
 
-import java.net.MalformedURLException;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,12 +16,7 @@ public final class Core extends JavaPlugin implements Listener {
 		saveDefaultConfig();
 
 		// Commands
-		try {
-			getCommand("genesis").setExecutor(new SelectGUI());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getCommand("genesis").setExecutor(new SelectGUI());
 
 		// Genus Enforcers
 		// getServer().getPluginManager().registerEvents(new Skeleton(), this);
