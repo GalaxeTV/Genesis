@@ -2,7 +2,8 @@ name: genesis
 version: '${version}'
 main: tv.galaxe.genesis.Core
 api-version: 1.20
-authors: [ garrettsummerfi3ld, josefbaltz ]
+authors: [ josefbaltz, garrettsummerfi3ld ]
+depend: [ LuckPerms ]
 description: A Minecraft server plugin inspired by the Origins mod.
 website: https://github.com/GalaxeTV/genesis
 commands:
