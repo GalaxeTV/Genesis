@@ -1,13 +1,12 @@
 package tv.galaxe.genesis;
 
+import net.luckperms.api.LuckPerms;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import net.luckperms.api.LuckPerms;
 import tv.galaxe.genesis.cmd.SelectGUI;
 import tv.galaxe.genesis.event.enforcer.Enderman;
 import tv.galaxe.genesis.event.enforcer.Phantom;
