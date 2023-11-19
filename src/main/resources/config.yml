@@ -1,4 +1,5 @@
 # When specifying duration there are 20 ticks in a second
+# 'max-health', 'arrow-buff', 'water-damage' values must be doubles (ex: 16.0 and not 16)
 genus:
   skeleton:
     max-health: 16.0
@@ -6,11 +7,11 @@ genus:
     milk-buff:
       duration-ticks: 300
       amplifier: 0
-    arrow-buff: 2.0
+    arrow-buff: 1.0
   enderman:
     max-health: 20.0
     enderpearl-cooldown-ticks: 600
-    water-damage: 0.5
+    water-damage: 1.0
   phantom:
     max-health: 16.0
     daylight-fire-ticks: 60
