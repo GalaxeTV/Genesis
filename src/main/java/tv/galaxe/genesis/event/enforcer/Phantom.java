@@ -26,7 +26,8 @@ public class Phantom implements Listener {
 		if (event.getPlayer().hasPermission("genesis.genus.phantom")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new PhantomRunnable((Player) event.getPlayer()), 20, 20));
-			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Core.plugin.getConfig().getDouble("genus.phantom.max-health"));
+			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
+					.setBaseValue(Core.plugin.getConfig().getDouble("genus.phantom.max-health"));
 		}
 	}
 

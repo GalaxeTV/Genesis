@@ -32,7 +32,8 @@ public final class Skeleton implements Listener {
 		if (event.getPlayer().hasPermission("genesis.genus.skeleton")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new SkeletonRunnable((Player) event.getPlayer()), 0, 20));
-			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Core.plugin.getConfig().getDouble("genus.skeleton.max-health"));
+			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
+					.setBaseValue(Core.plugin.getConfig().getDouble("genus.skeleton.max-health"));
 		}
 	}
 
@@ -51,7 +52,10 @@ public final class Skeleton implements Listener {
 				&& event.getItem().getType() == Material.MILK_BUCKET) {
 			event.setItem(new ItemStack(Material.BUCKET));
 			event.getPlayer().clearActivePotionEffects();
-			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Core.plugin.getConfig().getInt("genus.skeleton.milk-buff.duration-ticks"), Core.plugin.getConfig().getInt("genus.skeleton.milk-buff.amplifier")));
+			event.getPlayer()
+					.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,
+							Core.plugin.getConfig().getInt("genus.skeleton.milk-buff.duration-ticks"),
+							Core.plugin.getConfig().getInt("genus.skeleton.milk-buff.amplifier")));
 		}
 	}
 

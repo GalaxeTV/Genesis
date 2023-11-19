@@ -2,7 +2,6 @@ package tv.galaxe.genesis.runnable;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-
 import tv.galaxe.genesis.Core;
 
 public final class EndermanRunnable implements Runnable {
