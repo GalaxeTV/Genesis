@@ -3,6 +3,8 @@ package tv.galaxe.genesis.runnable;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import tv.galaxe.genesis.Core;
+
 public class PhantomRunnable implements Runnable {
 	private Player player;
 
@@ -15,7 +17,7 @@ public class PhantomRunnable implements Runnable {
 		if (player.getGameMode().equals(GameMode.SURVIVAL) && player.getWorld().isDayTime()
 				&& !(player.isInWaterOrRain()) && !(player.getLocation().getBlock().getLightFromSky() < 15)
 				&& player.getEquipment().getHelmet() == null) {
-			player.setFireTicks(60);
+			player.setFireTicks(Core.plugin.getConfig().getInt("genus.phantom.daylight-fire-ticks"));
 		}
 	}
 }

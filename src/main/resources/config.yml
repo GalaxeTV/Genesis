@@ -1,0 +1,16 @@
+# When specifying duration there are 20 ticks in a second
+genus:
+  skeleton:
+    max-health: 16.0
+    daylight-fire-ticks: 60
+    milk-buff:
+      duration-ticks: 300
+      amplifier: 0
+    arrow-buff: 2.0
+  enderman:
+    max-health: 20.0
+    enderpearl-cooldown-ticks: 600
+    water-damage: 0.5
+  phantom:
+    max-health: 16.0
+    daylight-fire-ticks: 60

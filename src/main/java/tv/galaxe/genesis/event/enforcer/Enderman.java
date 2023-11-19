@@ -33,7 +33,7 @@ public final class Enderman implements Listener {
 		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new EndermanRunnable((Player) event.getPlayer()), 0, 20));
-			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
+			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Core.plugin.getConfig().getDouble("genus.enderman.max-health"));
 		}
 	}
 
@@ -53,7 +53,7 @@ public final class Enderman implements Listener {
 			if (cooldownMap.getOrDefault(event.getPlayer(), currentTick) <= currentTick) {
 				event.setCancelled(true);
 				event.getPlayer().launchProjectile(EnderPearl.class);
-				cooldownMap.put(event.getPlayer(), event.getPlayer().getServer().getCurrentTick() + 600);
+				cooldownMap.put(event.getPlayer(), event.getPlayer().getServer().getCurrentTick() + Core.plugin.getConfig().getInt("genus.enderman.enderpearl-cooldown-ticks"));
 			} else {
 				event.setCancelled(true);
 				event.getPlayer()
