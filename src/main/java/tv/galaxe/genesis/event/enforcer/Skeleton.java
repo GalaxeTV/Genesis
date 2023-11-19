@@ -51,7 +51,7 @@ public final class Skeleton implements Listener {
 				&& event.getItem().getType() == Material.MILK_BUCKET) {
 			event.setItem(new ItemStack(Material.BUCKET));
 			event.getPlayer().clearActivePotionEffects();
-			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 300, 1));
+			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 300, 0));
 		}
 	}
 
@@ -61,7 +61,7 @@ public final class Skeleton implements Listener {
 				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter()).hasPermission("genesis.genus.skeleton")
 				&& ((Player) ((AbstractArrow) event.getDamager()).getShooter()).getGameMode().equals(GameMode.SURVIVAL)
 				&& !(event.getDamager() instanceof Trident)) {
-			event.setDamage(event.getDamage() * 1.5);
+			event.setDamage(event.getDamage() + 2.0);
 		}
 	}
 
