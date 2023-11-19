@@ -34,7 +34,7 @@ public final class Core extends JavaPlugin implements Listener {
 			}
 		});
 
-		// Genus Enforcers
+		// Class Enforcers
 		getServer().getPluginManager().registerEvents(new Skeleton(), this);
 		getServer().getPluginManager().registerEvents(new Enderman(), this);
 		getServer().getPluginManager().registerEvents(new Phantom(), this);

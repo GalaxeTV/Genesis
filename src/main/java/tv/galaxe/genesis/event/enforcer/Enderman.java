@@ -30,17 +30,17 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")) {
+		if (event.getPlayer().hasPermission("genesis.classes.enderman")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new EndermanRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
-					.setBaseValue(Core.plugin.getConfig().getDouble("genus.enderman.max-health"));
+					.setBaseValue(Core.plugin.getConfig().getDouble("classes.enderman.max-health"));
 		}
 	}
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")
+		if (event.getPlayer().hasPermission("genesis.classes.enderman")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
@@ -48,14 +48,14 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void actionKey(PlayerSwapHandItemsEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")
+		if (event.getPlayer().hasPermission("genesis.classes.enderman")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			int currentTick = event.getPlayer().getServer().getCurrentTick();
 			if (cooldownMap.getOrDefault(event.getPlayer(), currentTick) <= currentTick) {
 				event.setCancelled(true);
 				event.getPlayer().launchProjectile(EnderPearl.class);
 				cooldownMap.put(event.getPlayer(), event.getPlayer().getServer().getCurrentTick()
-						+ Core.plugin.getConfig().getInt("genus.enderman.enderpearl-cooldown-ticks"));
+						+ Core.plugin.getConfig().getInt("classes.enderman.enderpearl-cooldown-ticks"));
 			} else {
 				event.setCancelled(true);
 				event.getPlayer().sendActionBar(Component.text("You can use this ability in ")
@@ -69,7 +69,7 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void onEnderPearl(PlayerTeleportEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")
+		if (event.getPlayer().hasPermission("genesis.classes.enderman")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
 				&& event.getCause() == TeleportCause.ENDER_PEARL) {
 			event.setCancelled(true);
@@ -81,7 +81,7 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.enderman")
+		if (event.getPlayer().hasPermission("genesis.classes.enderman")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			ItemStack activeItem = (!event.getPlayer().getInventory().getItemInMainHand().isEmpty())
 					? event.getPlayer().getInventory().getItemInMainHand().clone()

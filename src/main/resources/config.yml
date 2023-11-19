@@ -1,6 +1,6 @@
 # When specifying duration there are 20 ticks in a second
 # 'max-health', 'arrow-buff', 'water-damage' values must be doubles (ex: 16.0 and not 16)
-genus:
+classes:
   skeleton:
     max-health: 16.0
     daylight-fire-ticks: 60

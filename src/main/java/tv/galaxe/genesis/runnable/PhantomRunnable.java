@@ -16,7 +16,7 @@ public class PhantomRunnable implements Runnable {
 		if (player.getGameMode().equals(GameMode.SURVIVAL) && player.getWorld().isDayTime()
 				&& !(player.isInWaterOrRain()) && !(player.getLocation().getBlock().getLightFromSky() < 15)
 				&& player.getEquipment().getHelmet() == null) {
-			player.setFireTicks(Core.plugin.getConfig().getInt("genus.phantom.daylight-fire-ticks"));
+			player.setFireTicks(Core.plugin.getConfig().getInt("classes.phantom.daylight-fire-ticks"));
 		}
 	}
 }

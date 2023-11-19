@@ -29,17 +29,17 @@ public final class Skeleton implements Listener {
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.skeleton")) {
+		if (event.getPlayer().hasPermission("genesis.classes.skeleton")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new SkeletonRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
-					.setBaseValue(Core.plugin.getConfig().getDouble("genus.skeleton.max-health"));
+					.setBaseValue(Core.plugin.getConfig().getDouble("classes.skeleton.max-health"));
 		}
 	}
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.skeleton")
+		if (event.getPlayer().hasPermission("genesis.classes.skeleton")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
@@ -47,31 +47,32 @@ public final class Skeleton implements Listener {
 
 	@EventHandler
 	public void onDrinkMilk(PlayerItemConsumeEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.skeleton")
+		if (event.getPlayer().hasPermission("genesis.classes.skeleton")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
 				&& event.getItem().getType() == Material.MILK_BUCKET) {
 			event.setItem(new ItemStack(Material.BUCKET));
 			event.getPlayer().clearActivePotionEffects();
 			event.getPlayer()
 					.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,
-							Core.plugin.getConfig().getInt("genus.skeleton.milk-buff.duration-ticks"),
-							Core.plugin.getConfig().getInt("genus.skeleton.milk-buff.amplifier")));
+							Core.plugin.getConfig().getInt("classes.skeleton.milk-buff.duration-ticks"),
+							Core.plugin.getConfig().getInt("classes.skeleton.milk-buff.amplifier")));
 		}
 	}
 
 	@EventHandler
 	public void onShootBowDamage(EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof AbstractArrow // Prevent errors by checking if the Damager is an AbstractArrow
-				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter()).hasPermission("genesis.genus.skeleton")
+				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter())
+						.hasPermission("genesis.classes.skeleton")
 				&& ((Player) ((AbstractArrow) event.getDamager()).getShooter()).getGameMode().equals(GameMode.SURVIVAL)
 				&& !(event.getDamager() instanceof Trident)) {
-			event.setDamage(event.getDamage() + Core.plugin.getConfig().getDouble("genus.skeleton.arrow-buff"));
+			event.setDamage(event.getDamage() + Core.plugin.getConfig().getDouble("classes.skeleton.arrow-buff"));
 		}
 	}
 
 	@EventHandler
 	public void onUndeadMobTarget(EntityTargetLivingEntityEvent event) {
-		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.genus.skeleton")
+		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.classes.skeleton")
 				&& (event.getEntity() instanceof AbstractSkeleton || event.getEntity() instanceof Zombie)) {
 			event.setCancelled(true);
 		}

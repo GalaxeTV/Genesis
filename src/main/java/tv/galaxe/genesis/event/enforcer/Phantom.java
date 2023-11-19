@@ -23,17 +23,17 @@ public class Phantom implements Listener {
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.phantom")) {
+		if (event.getPlayer().hasPermission("genesis.classes.phantom")) {
 			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
 					new PhantomRunnable((Player) event.getPlayer()), 20, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
-					.setBaseValue(Core.plugin.getConfig().getDouble("genus.phantom.max-health"));
+					.setBaseValue(Core.plugin.getConfig().getDouble("classes.phantom.max-health"));
 		}
 	}
 
 	@EventHandler
 	public void actionKey(PlayerSwapHandItemsEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.phantom")
+		if (event.getPlayer().hasPermission("genesis.classes.phantom")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			event.setCancelled(true);
 			event.getPlayer().setGliding(!event.getPlayer().isGliding());
@@ -42,7 +42,7 @@ public class Phantom implements Listener {
 
 	@EventHandler
 	public void glide(EntityToggleGlideEvent event) {
-		if (event.getEntity().hasPermission("genesis.genus.phantom")
+		if (event.getEntity().hasPermission("genesis.classes.phantom")
 				&& ((Player) event.getEntity()).getGameMode().equals(GameMode.SURVIVAL)
 				&& event.getEntity().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.AIR
 				&& (((Player) event.getEntity()).getInventory().getChestplate() == null
@@ -53,7 +53,7 @@ public class Phantom implements Listener {
 
 	@EventHandler
 	public void onSleep(PlayerBedEnterEvent event) {
-		if (event.getPlayer().hasPermission("genesis.genus.phantom")
+		if (event.getPlayer().hasPermission("genesis.classes.phantom")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			event.setCancelled(true);
 			event.setUseBed(Event.Result.DENY);
@@ -63,7 +63,7 @@ public class Phantom implements Listener {
 
 	@EventHandler
 	public void onPhantomTarget(EntityTargetLivingEntityEvent event) {
-		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.genus.phantom")
+		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.classes.phantom")
 				&& event.getEntity() instanceof org.bukkit.entity.Phantom) {
 			event.setCancelled(true);
 		}

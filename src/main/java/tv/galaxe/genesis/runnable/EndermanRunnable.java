@@ -15,7 +15,7 @@ public final class EndermanRunnable implements Runnable {
 	public void run() {
 		if (player.getGameMode().equals(GameMode.SURVIVAL)
 				&& ((player.isInRain() && player.getEquipment().getHelmet() == null) || player.isInWater())) {
-			player.damage(Core.plugin.getConfig().getDouble("genus.enderman.water-damage"));
+			player.damage(Core.plugin.getConfig().getDouble("classes.enderman.water-damage"));
 		}
 	}
 }

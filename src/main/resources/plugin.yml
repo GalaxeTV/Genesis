@@ -1,4 +1,4 @@
-name: genesis
+name: Genesis
 version: '${version}'
 main: tv.galaxe.genesis.Core
 api-version: 1.20
@@ -18,12 +18,12 @@ commands:
     default: op
     permission: genesis.reload
 permissions:
-  genesis.genus.skeleton:
-    description: Permission indicating the player has chosen the skeleton genus.
-  genesis.genus.enderman:
-    description: Permission indicating the player has chosen the enderman genus.
-  genesis.genus.phantom:
-    description: Permission indicating the player has chosen the phantom genus.
+  genesis.classes.skeleton:
+    description: Permission indicating the player has chosen the skeleton class.
+  genesis.classes.enderman:
+    description: Permission indicating the player has chosen the enderman class.
+  genesis.classes.phantom:
+    description: Permission indicating the player has chosen the phantom class.
   genesis.reload:
     description: Permission for reloading config file.
     default: op
