@@ -58,12 +58,11 @@ public final class Enderman implements Listener {
 						+ Core.plugin.getConfig().getInt("genus.enderman.enderpearl-cooldown-ticks"));
 			} else {
 				event.setCancelled(true);
-				event.getPlayer()
-						.sendActionBar(Component.text("You can use this ability in ")
-								.append(Component.text(String.format("%.1f",
-										cooldownMap.get(event.getPlayer())
-												- event.getPlayer().getServer().getCurrentTick() / 20.0)))
-								.append(Component.text(" seconds!")));
+				event.getPlayer().sendActionBar(Component.text("You can use this ability in ")
+						.append(Component.text(String.format("%.1f",
+								(cooldownMap.get(event.getPlayer()) - event.getPlayer().getServer().getCurrentTick())
+										/ 20.0)))
+						.append(Component.text(" seconds!")));
 			}
 		}
 	}
