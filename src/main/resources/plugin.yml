@@ -1,16 +1,28 @@
 name: genesis
 version: '${version}'
 main: tv.galaxe.genesis.Core
-api-version: 1.19
+api-version: 1.20
 authors: [ garrettsummerfi3ld, josefbaltz ]
 description: A Minecraft server plugin inspired by the Origins mod.
 website: https://github.com/GalaxeTV/genesis
 commands:
   genesis:
     description: Genesis Help Menu
-    usage: /genesis
+    usage: "Usage: /<command>"
     aliases: [gen, g]
     default: true
+  genesisreload:
+    description: Reload config file
+    usage: "Usage: /<command>"
+    default: op
+    permission: genesis.reload
 permissions:
   genesis.genus.skeleton:
     description: Permission indicating the player has chosen the skeleton genus.
+  genesis.genus.enderman:
+    description: Permission indicating the player has chosen the enderman genus.
+  genesis.genus.phantom:
+    description: Permission indicating the player has chosen the phantom genus.
+  genesis.reload:
+    description: Permission for reloading config file.
+    default: op
