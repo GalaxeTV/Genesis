@@ -1,7 +1,5 @@
 package tv.galaxe.genesis.event.enforcer;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
@@ -28,7 +26,7 @@ import tv.galaxe.genesis.runnable.EndermanRunnable;
 
 public final class Enderman implements Listener {
 	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
-	private static HashMap<Player, Instant> cooldownMap = new HashMap<Player, Instant>();
+	private static HashMap<Player, Integer> cooldownMap = new HashMap<Player, Integer>();
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
@@ -51,16 +49,19 @@ public final class Enderman implements Listener {
 	public void actionKey(PlayerSwapHandItemsEvent event) {
 		if (event.getPlayer().hasPermission("genesis.genus.enderman")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
-			if (cooldownMap.getOrDefault(event.getPlayer(), Instant.now().minusSeconds(1)).isBefore(Instant.now())) {
+			int currentTick = event.getPlayer().getServer().getCurrentTick();
+			if (cooldownMap.getOrDefault(event.getPlayer(), currentTick) <= currentTick) {
 				event.setCancelled(true);
 				event.getPlayer().launchProjectile(EnderPearl.class);
-				cooldownMap.put(event.getPlayer(), Instant.now().plusSeconds(30));
+				cooldownMap.put(event.getPlayer(), event.getPlayer().getServer().getCurrentTick() + 600);
 			} else {
 				event.setCancelled(true);
-				event.getPlayer().sendActionBar(Component.text("You can use this ability in ")
-						.append(Component.text(String.format("%.1f",
-								ChronoUnit.MILLIS.between(Instant.now(), cooldownMap.get(event.getPlayer())) / 1000.0)))
-						.append(Component.text(" seconds!")));
+				event.getPlayer()
+						.sendActionBar(Component.text("You can use this ability in ")
+								.append(Component.text(String.format("%.1f",
+										cooldownMap.get(event.getPlayer())
+												- event.getPlayer().getServer().getCurrentTick() / 20.0)))
+								.append(Component.text(" seconds!")));
 			}
 		}
 	}
