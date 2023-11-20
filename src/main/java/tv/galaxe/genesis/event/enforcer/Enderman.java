@@ -51,13 +51,12 @@ public final class Enderman implements Listener {
 		if (event.getPlayer().hasPermission("genesis.classes.enderman")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			int currentTick = event.getPlayer().getServer().getCurrentTick();
+			event.setCancelled(true);
 			if (cooldownMap.getOrDefault(event.getPlayer(), currentTick) <= currentTick) {
-				event.setCancelled(true);
 				event.getPlayer().launchProjectile(EnderPearl.class);
 				cooldownMap.put(event.getPlayer(), event.getPlayer().getServer().getCurrentTick()
 						+ Core.plugin.getConfig().getInt("classes.enderman.enderpearl-cooldown-ticks"));
 			} else {
-				event.setCancelled(true);
 				event.getPlayer().sendActionBar(Component.text("You can use this ability in ")
 						.append(Component.text(String.format("%.1f",
 								(cooldownMap.get(event.getPlayer()) - event.getPlayer().getServer().getCurrentTick())
