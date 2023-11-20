@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
@@ -66,6 +68,15 @@ public class Phantom implements Listener {
 		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.classes.phantom")
 				&& event.getEntity() instanceof org.bukkit.entity.Phantom) {
 			event.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void onFallDamage(EntityDamageEvent event) {
+		if (event.getEntity().hasPermission("genesis.classes.phantom") && event.getCause().equals(DamageCause.FALL)) {
+			event.setCancelled(true);
+			event.setDamage(
+					event.getDamage() * Core.plugin.getConfig().getDouble("classes.phantom.fall-damage-modifier"));
 		}
 	}
 }
