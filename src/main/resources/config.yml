@@ -14,12 +14,19 @@ classes:
     water-damage: 1.0
   axolotl:
     max-health: 16.0
-    ability-cooldown: 200
+    ability-charge: 200
     ability:
       cooldown: 200
       slowness-level: 1
       regen-level: 1
     aquatic-mob-buff: 1.0
+  sculk:
+    max-health: 20.0
+    ability:
+      level-cost: 1
+      health-reward: 1
+    mining-fatiugre-level: 1
+    slowness-level: 1
   phantom:
     max-health: 16.0
     daylight-fire-ticks: 60

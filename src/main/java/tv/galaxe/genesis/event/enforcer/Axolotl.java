@@ -43,7 +43,7 @@ public class Axolotl implements Listener {
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
 					.setBaseValue(Core.plugin.getConfig().getDouble("classes.axolotl.max-health"));
 		}
-		abilityMap.put(event.getPlayer(), Core.plugin.getConfig().getInt("classes.axolotl.ability-cooldown"));
+		abilityMap.put(event.getPlayer(), Core.plugin.getConfig().getInt("classes.axolotl.ability-charge"));
 		event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
 				PotionEffect.INFINITE_DURATION, 0, true, false, false));
 	}
