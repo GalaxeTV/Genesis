@@ -24,7 +24,7 @@ classes:
     max-health: 20.0
     ability:
       level-cost: 1
-      health-reward: 1
+      health-reward: 2.0
     mining-fatiugre-level: 1
     slowness-level: 1
   phantom:
