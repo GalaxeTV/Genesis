@@ -24,6 +24,8 @@ permissions:
     description: Permission indicating the player has chosen the enderman class.
   genesis.classes.phantom:
     description: Permission indicating the player has chosen the phantom class.
+  genesis.classes.axolotl:
+    description: Permission indicating the player has chosen the axolotl class.
   genesis.reload:
     description: Permission for reloading config file.
     default: op
