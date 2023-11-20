@@ -55,7 +55,7 @@ public final class Enderman implements Listener {
 			if (cooldownMap.getOrDefault(event.getPlayer(), currentTick) <= currentTick) {
 				event.getPlayer().launchProjectile(EnderPearl.class);
 				cooldownMap.put(event.getPlayer(), event.getPlayer().getServer().getCurrentTick()
-						+ Core.plugin.getConfig().getInt("classes.enderman.enderpearl-cooldown-ticks"));
+						+ Core.plugin.getConfig().getInt("classes.enderman.ability-cooldown"));
 			} else {
 				event.getPlayer().sendActionBar(Component.text("You can use this ability in ")
 						.append(Component.text(String.format("%.1f",

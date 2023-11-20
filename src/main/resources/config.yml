@@ -10,8 +10,17 @@ classes:
     arrow-buff: 1.0
   enderman:
     max-health: 20.0
-    enderpearl-cooldown-ticks: 600
+    ability-cooldown: 600
     water-damage: 1.0
+  axolotl:
+    max-health: 16.0
+    ability-cooldown: 200
+    ability:
+      cooldown: 200
+      slowness-level: 1
+      regen-level: 1
+    aquatic-mob-buff: 1.0
   phantom:
     max-health: 16.0
     daylight-fire-ticks: 60
+    fall-damage-modifier: 0.48
