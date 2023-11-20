@@ -11,6 +11,7 @@ import tv.galaxe.genesis.cmd.SelectGUI;
 import tv.galaxe.genesis.event.enforcer.Axolotl;
 import tv.galaxe.genesis.event.enforcer.Enderman;
 import tv.galaxe.genesis.event.enforcer.Phantom;
+import tv.galaxe.genesis.event.enforcer.Sculk;
 import tv.galaxe.genesis.event.enforcer.Skeleton;
 
 public final class Core extends JavaPlugin implements Listener {
@@ -40,6 +41,7 @@ public final class Core extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(new Enderman(), this);
 		getServer().getPluginManager().registerEvents(new Phantom(), this);
 		getServer().getPluginManager().registerEvents(new Axolotl(), this);
+		getServer().getPluginManager().registerEvents(new Sculk(), this);
 	}
 
 	@Override
