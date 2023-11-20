@@ -73,7 +73,7 @@ public final class Skeleton implements Listener {
 	@EventHandler
 	public void onUndeadMobTarget(EntityTargetLivingEntityEvent event) {
 		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.classes.skeleton")
-				&& (event.getEntity() instanceof AbstractSkeleton || event.getEntity() instanceof Zombie)) {
+				&& event.getEntity() instanceof AbstractSkeleton) {
 			event.setCancelled(true);
 		}
 	}
