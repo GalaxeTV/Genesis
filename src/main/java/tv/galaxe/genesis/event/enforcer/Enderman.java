@@ -8,12 +8,16 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
@@ -92,6 +96,26 @@ public final class Enderman implements Listener {
 			event.getBlock().getDrops(activeItem).forEach((item) -> {
 				event.getBlock().getWorld().dropItemNaturally(loc, item);
 			});
+		}
+	}
+
+	@EventHandler
+	public void onMobTarget(EntityTargetLivingEntityEvent event) {
+		if (event.getTarget() != null && event.getTarget().hasPermission("genesis.classes.enderman")
+				&& (event.getEntity() instanceof org.bukkit.entity.Enderman
+						|| event.getEntity() instanceof Endermite)) {
+			event.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void onShootBowDamage(EntityDamageByEntityEvent event) {
+		if (event.getDamager() instanceof AbstractArrow // Prevent errors by checking if the Damager is an AbstractArrow
+				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter())
+						.hasPermission("genesis.classes.enderman")
+				&& ((Player) ((AbstractArrow) event.getDamager()).getShooter()).getGameMode()
+						.equals(GameMode.SURVIVAL)) {
+			event.setDamage(event.getDamage() - Core.plugin.getConfig().getDouble("classes.enderman.ranged-debuff"));
 		}
 	}
 }
