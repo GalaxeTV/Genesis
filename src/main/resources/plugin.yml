@@ -28,6 +28,8 @@ permissions:
     description: Permission indicating the player has chosen the axolotl class.
   genesis.classes.sculk:
     description: Permission indicating the player has chosen the sculk class.
+  genesis.classes.shulker:
+    description: Permission indicating the player has chosen the sculk class.
   genesis.reload:
     description: Permission for reloading config file.
     default: op

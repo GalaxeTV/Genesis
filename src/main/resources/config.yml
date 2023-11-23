@@ -28,6 +28,10 @@ classes:
       health-reward: 2.0
     mining-fatigue-level: 1
     slowness-level: 1
+  shulker:
+    max-health: 20.0
+    natural-armor: 12.0
+    heavy-armor-slowness: 2
   phantom:
     max-health: 16.0
     daylight-fire-ticks: 60
