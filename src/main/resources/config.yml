@@ -12,6 +12,7 @@ classes:
     max-health: 20.0
     ability-cooldown: 600
     water-damage: 1.0
+    ranged-debuff: 2.0
   axolotl:
     max-health: 16.0
     ability-charge: 200
@@ -25,7 +26,7 @@ classes:
     ability:
       level-cost: 1
       health-reward: 2.0
-    mining-fatiugre-level: 1
+    mining-fatigue-level: 1
     slowness-level: 1
   phantom:
     max-health: 16.0
