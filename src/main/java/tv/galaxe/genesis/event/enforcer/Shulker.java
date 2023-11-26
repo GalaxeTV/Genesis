@@ -42,8 +42,7 @@ public final class Shulker implements Listener {
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.shulker")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.shulker")) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}

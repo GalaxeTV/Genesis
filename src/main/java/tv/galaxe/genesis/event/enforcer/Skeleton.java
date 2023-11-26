@@ -1,7 +1,6 @@
 package tv.galaxe.genesis.event.enforcer;
 
 import java.util.HashMap;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.AbstractArrow;
@@ -38,8 +37,7 @@ public final class Skeleton implements Listener {
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.skeleton")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.skeleton")) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}
@@ -47,7 +45,6 @@ public final class Skeleton implements Listener {
 	@EventHandler
 	public void onDrinkMilk(PlayerItemConsumeEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.skeleton")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
 				&& event.getItem().getType() == Material.MILK_BUCKET) {
 			event.setItem(new ItemStack(Material.BUCKET));
 			event.getPlayer().clearActivePotionEffects();
@@ -63,7 +60,6 @@ public final class Skeleton implements Listener {
 		if (event.getDamager() instanceof AbstractArrow // Prevent errors by checking if the Damager is an AbstractArrow
 				&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter())
 						.hasPermission("genesis.classes.skeleton")
-				&& ((Player) ((AbstractArrow) event.getDamager()).getShooter()).getGameMode().equals(GameMode.SURVIVAL)
 				&& !(event.getDamager() instanceof Trident)) {
 			event.setDamage(event.getDamage() + Core.plugin.getConfig().getDouble("classes.skeleton.arrow-buff"));
 		}
