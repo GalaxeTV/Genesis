@@ -1,17 +1,8 @@
 package tv.galaxe.genesis.event.enforcer;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
-
-import net.kyori.adventure.bossbar.BossBar;
-import net.kyori.adventure.bossbar.BossBar.Color;
-import net.kyori.adventure.bossbar.BossBar.Overlay;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-
 import java.util.EnumSet;
 import java.util.HashMap;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
