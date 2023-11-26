@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -28,13 +29,45 @@ public class SelectGUI implements CommandExecutor {
 		selectGUI.setDefaultClickAction(event -> {
 			event.setCancelled(true);
 		});
-		selectGUI.getFiller().fill(new GuiItem(Material.BLACK_STAINED_GLASS_PANE));
+		ItemStack bg = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+		ItemMeta bgMeta = bg.getItemMeta();
+		bgMeta.displayName(Component.text(""));
+		bg.setItemMeta(bgMeta);
+		selectGUI.getFiller().fill(new GuiItem(bg));
+
+		// Review Button
+		ItemStack review = new ItemStack(Material.NETHER_STAR);
+		ItemMeta reviewMeta = review.getItemMeta();
+		reviewMeta.displayName(Component.text("Review").decoration(TextDecoration.ITALIC, false));
+		review.setItemMeta(reviewMeta);
+		selectGUI.setItem(2, 5, new GuiItem(review, event -> {
+		}));
+
+		// Cancel Button
+		ItemStack cancel = new ItemStack(Material.REDSTONE_BLOCK);
+		ItemMeta cancelMeta = cancel.getItemMeta();
+		cancelMeta.displayName(
+				Component.text("Cancel").decoration(TextDecoration.ITALIC, false).color(TextColor.color(255, 0, 0)));
+		cancel.setItemMeta(cancelMeta);
+		// selectGUI.setItem(2, 5, new GuiItem(cancel, event -> {
+		// }));
 
 		// Confirm Button
-		selectGUI.setItem(2, 5, new GuiItem(Material.NETHER_STAR));
+		ItemStack confirm = new ItemStack(Material.EMERALD_BLOCK);
+		ItemMeta confirmMeta = confirm.getItemMeta();
+		confirmMeta.displayName(
+				Component.text("Confirm").decoration(TextDecoration.ITALIC, false).color(TextColor.color(0, 255, 0)));
+		confirm.setItemMeta(confirmMeta);
+		// selectGUI.setItem(2, 5, new GuiItem(confirm, event -> {
+		// }));
 
 		// Skeleton
-		selectGUI.setItem(2, 1, new GuiItem(Material.SKELETON_SKULL));
+		ItemStack skeleton = new ItemStack(Material.SKELETON_SKULL);
+		ItemMeta skeletonMeta = skeleton.getItemMeta();
+		skeletonMeta.displayName(Component.text("Skeleton Class").decoration(TextDecoration.ITALIC, false));
+		skeleton.setItemMeta(skeletonMeta);
+		selectGUI.setItem(2, 1, new GuiItem(skeleton, event -> {
+		}));
 
 		// Enderman
 		ItemStack enderman = createHead("7a59bb0a7a32965b3d90d8eafa899d1835f424509eadd4e6b709ada50b9cf");
@@ -45,8 +78,12 @@ public class SelectGUI implements CommandExecutor {
 		}));
 
 		// Axolotl
-		selectGUI.setItem(2, 3,
-				new GuiItem(createHead("d704254139a0b1a926e7552482dd67679c6ae0dc8335c980dbd1c0d99634a708")));
+		ItemStack axolotl = createHead("d704254139a0b1a926e7552482dd67679c6ae0dc8335c980dbd1c0d99634a708");
+		ItemMeta axolotlMeta = axolotl.getItemMeta();
+		axolotlMeta.displayName(Component.text("Axolotl Class").decoration(TextDecoration.ITALIC, false));
+		axolotl.setItemMeta(axolotlMeta);
+		selectGUI.setItem(2, 3, new GuiItem(axolotl, event -> {
+		}));
 
 		// Sculk
 		selectGUI.setItem(1, 4,
