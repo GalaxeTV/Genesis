@@ -1,6 +1,14 @@
 package tv.galaxe.genesis.event.enforcer;
 
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent;
+
+import net.kyori.adventure.bossbar.BossBar;
+import net.kyori.adventure.bossbar.BossBar.Color;
+import net.kyori.adventure.bossbar.BossBar.Overlay;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+
 import java.util.EnumSet;
 import java.util.HashMap;
 import org.bukkit.GameMode;
@@ -12,6 +20,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -49,8 +58,7 @@ public final class Shulker implements Listener {
 
 	@EventHandler
 	public void onArmorEquip(PlayerArmorChangeEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.shulker")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.shulker")) {
 			ItemStack[] armorContents = event.getPlayer().getInventory().getArmorContents();
 			boolean wearingHeavyArmor = false;
 			for (int i = 0; i < armorContents.length; i++) {
@@ -71,6 +79,14 @@ public final class Shulker implements Listener {
 			} else {
 				event.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 			}
+		}
+	}
+
+	@EventHandler
+	public void actionKey(PlayerSwapHandItemsEvent event) {
+		if (event.getPlayer().hasPermission("genesis.classes.shulker")) {
+			event.setCancelled(true);
+			event.getPlayer().openInventory(event.getPlayer().getEnderChest());
 		}
 	}
 }
