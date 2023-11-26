@@ -44,8 +44,7 @@ public final class Enderman implements Listener {
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.enderman")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.enderman")) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}
@@ -73,7 +72,6 @@ public final class Enderman implements Listener {
 	@EventHandler
 	public void onEnderPearl(PlayerTeleportEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.enderman")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)
 				&& event.getCause() == TeleportCause.ENDER_PEARL) {
 			event.setCancelled(true);
 			event.getPlayer().teleport(event.getTo());

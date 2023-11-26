@@ -2,6 +2,7 @@ package tv.galaxe.genesis.event.enforcer;
 
 import java.util.EnumSet;
 import java.util.HashMap;
+import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -44,8 +45,7 @@ public class Sculk implements Listener {
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.sculk")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.sculk")) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}
@@ -89,7 +89,8 @@ public class Sculk implements Listener {
 		if (event.getPlayer().hasPermission("genesis.classes.sculk")
 				&& nonVegetarian.contains(event.getItem().getType())) {
 			event.setCancelled(true);
-			event.getPlayer().playSound(event.getPlayer(), Sound.ENTITY_VILLAGER_NO, 1.0F, 1.0F);
+			event.getPlayer().playSound(event.getPlayer(), Sound.BLOCK_SCULK_CHARGE, 1.0F, 1.0F);
+			event.getPlayer().sendActionBar(Component.text("You can only eat vegetarian food."));
 		}
 	}
 }

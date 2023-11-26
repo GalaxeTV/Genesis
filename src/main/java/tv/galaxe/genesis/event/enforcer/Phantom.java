@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.scheduler.BukkitTask;
 import tv.galaxe.genesis.Core;
@@ -34,9 +35,15 @@ public class Phantom implements Listener {
 	}
 
 	@EventHandler
+	public void onDisconnect(PlayerQuitEvent event) {
+		if (event.getPlayer().hasPermission("genesis.classes.phantom")) {
+			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
+		}
+	}
+
+	@EventHandler
 	public void actionKey(PlayerSwapHandItemsEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.phantom")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.phantom")) {
 			event.setCancelled(true);
 			event.getPlayer().setGliding(!event.getPlayer().isGliding());
 		}

@@ -50,16 +50,15 @@ public class Axolotl implements Listener {
 					new AxolotlRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
 					.setBaseValue(Core.plugin.getConfig().getDouble("classes.axolotl.max-health"));
+			abilityMap.put(event.getPlayer(), Core.plugin.getConfig().getInt("classes.axolotl.ability-charge"));
+			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
+					PotionEffect.INFINITE_DURATION, 0, true, false, false));
 		}
-		abilityMap.put(event.getPlayer(), Core.plugin.getConfig().getInt("classes.axolotl.ability-charge"));
-		event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
-				PotionEffect.INFINITE_DURATION, 0, true, false, false));
 	}
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
-		if (event.getPlayer().hasPermission("genesis.classes.axolotl")
-				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+		if (event.getPlayer().hasPermission("genesis.classes.axolotl")) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
 		}
 	}
@@ -122,14 +121,11 @@ public class Axolotl implements Listener {
 			if (event.getDamager() instanceof AbstractArrow // Prevent errors by checking if the Damager is an
 															// AbstractArrow
 					&& ((Entity) ((AbstractArrow) event.getDamager()).getShooter())
-							.hasPermission("genesis.classes.axolotl")
-					&& ((Player) ((AbstractArrow) event.getDamager()).getShooter()).getGameMode()
-							.equals(GameMode.SURVIVAL)) {
+							.hasPermission("genesis.classes.axolotl")) {
 				event.setDamage(
 						event.getDamage() + Core.plugin.getConfig().getDouble("classes.axolotl.aquatic-mob-buff"));
 			}
-			if (event.getDamager() instanceof Player && event.getDamager().hasPermission("genesis.classes.axolotl")
-					&& ((Player) event.getDamager()).getGameMode().equals(GameMode.SURVIVAL)) {
+			if (event.getDamager() instanceof Player && event.getDamager().hasPermission("genesis.classes.axolotl")) {
 				event.setDamage(
 						event.getDamage() + Core.plugin.getConfig().getDouble("classes.axolotl.aquatic-mob-buff"));
 			}
