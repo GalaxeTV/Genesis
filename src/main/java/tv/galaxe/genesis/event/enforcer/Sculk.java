@@ -115,15 +115,17 @@ public class Sculk implements Listener {
 
 	@EventHandler
 	public void onStealthWalk(PlayerToggleSneakEvent event) {
-		// Default sneak spead is 30% of the default speed (0.2F)
-		// 0.2F * 0.30 = 0.06F (default sneak speed)
-		// 0.2F * 0.75 = 0.15F (Swift Sneak III speed)
-		// If we set to 0.5F we can get Swift Sneak III speeds without any fuss
-		// 0.5F * 0.30 = 0.15F
-		if (event.isSneaking()) {
-			event.getPlayer().setWalkSpeed(0.5F);
-		} else {
-			event.getPlayer().setWalkSpeed(0.2F);
+		if (event.getPlayer().hasPermission("genesis.classes.sculk")) {
+			// Default sneak spead is 30% of the default speed (0.2F)
+			// 0.2F * 0.30 = 0.06F (default sneak speed)
+			// 0.2F * 0.75 = 0.15F (Swift Sneak III speed)
+			// If we set to 0.5F we can get Swift Sneak III speeds without any fuss
+			// 0.5F * 0.30 = 0.15F
+			if (event.isSneaking()) {
+				event.getPlayer().setWalkSpeed(0.5F);
+			} else {
+				event.getPlayer().setWalkSpeed(0.2F);
+			}
 		}
 	}
 }
