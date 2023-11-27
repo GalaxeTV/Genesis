@@ -37,15 +37,15 @@ jobs:
     - name: Change Gradle Permissions
       run: chmod +x gradlew
     - name: Setup Gradle to generate and submit dependency graphs
-      uses: gradle/gradle-build-action@v2.9.0
+      uses: gradle/gradle-build-action@v2.10.0
       with:
         dependency-graph: generate-and-submit
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2.9.0
+      uses: gradle/gradle-build-action@v2.10.0
       with:
         arguments: build
     - name: Shadow Jar
-      uses: gradle/gradle-build-action@v2.9.0
+      uses: gradle/gradle-build-action@v2.10.0
       with:
         arguments: clean shadowJar
     - name: Upload Artifact
