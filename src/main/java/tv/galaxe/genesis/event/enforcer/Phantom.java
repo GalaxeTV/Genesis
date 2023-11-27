@@ -31,6 +31,13 @@ public class Phantom implements Listener {
 		phantomQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
 	}
 
+	public static void newUser(Player player) {
+		taskMap.put(player,
+				Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin, new PhantomRunnable(player), 20, 20));
+		player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+				.setBaseValue(Core.plugin.getConfig().getDouble("classes.phantom.max-health"));
+	}
+
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.phantom")) {

@@ -10,7 +10,7 @@ classes:
     arrow-buff: 1.0
   enderman:
     max-health: 20.0
-    ability-cooldown: 600
+    ability-cooldown: 200
     water-damage: 1.0
     ranged-debuff: 2.0
   axolotl:
@@ -30,8 +30,7 @@ classes:
     slowness-level: 1
   shulker:
     max-health: 28.0
-    natural-armor: 12.0
-    heavy-armor-slowness: 2
+    heavy-armor-slowness: 3
   phantom:
     max-health: 16.0
     daylight-fire-ticks: 60

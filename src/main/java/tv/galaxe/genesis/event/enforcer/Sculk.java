@@ -38,6 +38,13 @@ public class Sculk implements Listener {
 			Material.BEEF, Material.CHICKEN, Material.COD, Material.MUTTON, Material.PORKCHOP, Material.RABBIT,
 			Material.SALMON, Material.ROTTEN_FLESH, Material.TROPICAL_FISH, Material.PUFFERFISH, Material.RABBIT_STEW);
 
+	public static void newUser(Player player) {
+		taskMap.put(player,
+				Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin, new SculkRunnable(player), 0, 20));
+		player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+				.setBaseValue(Core.plugin.getConfig().getDouble("classes.sculk.max-health"));
+	}
+
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.sculk")) {

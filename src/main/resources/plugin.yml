@@ -11,13 +11,15 @@ commands:
     description: Genesis Help Menu
     usage: "Usage: /<command>"
     aliases: [gen, g]
-    default: true
+    permission: genesis.gui
   genesisreload:
     description: Reload config file
     usage: "Usage: /<command>"
     default: op
     permission: genesis.reload
 permissions:
+  genesis.gui:
+    description: Permission allowing the player to choose a new class.
   genesis.classes.skeleton:
     description: Permission indicating the player has chosen the skeleton class.
     default: op

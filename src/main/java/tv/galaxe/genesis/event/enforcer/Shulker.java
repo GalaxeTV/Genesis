@@ -27,6 +27,13 @@ public final class Shulker implements Listener {
 			Material.DIAMOND_BOOTS, Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE,
 			Material.NETHERITE_LEGGINGS, Material.NETHERITE_BOOTS);
 
+	public static void newUser(Player player) {
+		player.getAttribute(Attribute.GENERIC_MAX_HEALTH)
+				.setBaseValue(Core.plugin.getConfig().getDouble("classes.shulker.max-health"));
+		player.getAttribute(Attribute.GENERIC_ARMOR)
+				.setBaseValue(Core.plugin.getConfig().getDouble("classes.shulker.natural-armor"));
+	}
+
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.shulker")) {

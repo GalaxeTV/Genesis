@@ -49,6 +49,16 @@ public class Axolotl implements Listener {
 		axolotlQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
 	}
 
+	public static void newUser(Player player) {
+		taskMap.put(player,
+				Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin, new AxolotlRunnable(player), 0, 20));
+		player.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
+				.setBaseValue(Core.plugin.getConfig().getDouble("classes.axolotl.max-health"));
+		abilityMap.put(player, Core.plugin.getConfig().getInt("classes.axolotl.ability-charge"));
+		player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, PotionEffect.INFINITE_DURATION, 0,
+				true, false, false));
+	}
+
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.axolotl")) {
