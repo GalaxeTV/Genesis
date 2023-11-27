@@ -1,5 +1,11 @@
 package tv.galaxe.genesis;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.registry.FlagConflictException;
+import com.sk89q.worldguard.protection.flags.registry.FlagRegistry;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +24,8 @@ import tv.galaxe.genesis.event.enforcer.Skeleton;
 public final class Core extends JavaPlugin implements Listener {
 	public static LuckPerms lp;
 	public static Plugin plugin;
+	public static ApplicableRegionSet disableSet;
+	public static StateFlag GENESIS_EFFECTS;
 
 	@Override
 	public void onEnable() {
@@ -44,6 +52,24 @@ public final class Core extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(new Axolotl(), this);
 		getServer().getPluginManager().registerEvents(new Sculk(), this);
 		getServer().getPluginManager().registerEvents(new Shulker(), this);
+	}
+
+	@Override
+	public void onLoad() {
+		// WorldGuard
+		FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
+		try {
+			StateFlag flag = new StateFlag("genesis-effects", true);
+			registry.register(flag);
+			GENESIS_EFFECTS = flag;
+		} catch (FlagConflictException e) {
+			Flag<?> existing = registry.get("genesis-effects");
+			if (existing instanceof StateFlag) {
+				GENESIS_EFFECTS = (StateFlag) existing;
+			} else {
+				// Fail silently shouldn't happen ... will make more robust in patch 1
+			}
+		}
 	}
 
 	@Override

@@ -17,7 +17,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import tv.galaxe.genesis.Core;
-import tv.galaxe.genesis.runnable.ShulkerRunnable;
 
 public final class Shulker implements Listener {
 	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
@@ -31,8 +30,6 @@ public final class Shulker implements Listener {
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.shulker")) {
-			taskMap.put(event.getPlayer(), Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin,
-					new ShulkerRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
 					.setBaseValue(Core.plugin.getConfig().getDouble("classes.shulker.max-health"));
 			event.getPlayer().getAttribute(Attribute.GENERIC_ARMOR)

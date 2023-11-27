@@ -1,5 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import java.util.EnumSet;
 import java.util.HashMap;
 import net.kyori.adventure.text.Component;
@@ -16,15 +18,20 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.scheduler.BukkitTask;
 import tv.galaxe.genesis.Core;
 import tv.galaxe.genesis.runnable.SculkRunnable;
 
 public class Sculk implements Listener {
 	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
+	public static RegionQuery sculkQuery;
+
+	public Sculk() {
+		sculkQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+	}
 
 	EnumSet<Material> nonVegetarian = EnumSet.of(Material.COOKED_BEEF, Material.COOKED_CHICKEN, Material.COOKED_COD,
 			Material.COOKED_MUTTON, Material.COOKED_PORKCHOP, Material.COOKED_RABBIT, Material.COOKED_SALMON,
@@ -39,14 +46,19 @@ public class Sculk implements Listener {
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
 					.setBaseValue(Core.plugin.getConfig().getDouble("classes.sculk.max-health"));
 		}
-		event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
-				PotionEffect.INFINITE_DURATION, 0, true, false, false));
 	}
 
 	@EventHandler
 	public void onDisconnect(PlayerQuitEvent event) {
 		if (event.getPlayer().hasPermission("genesis.classes.sculk")) {
 			Core.plugin.getServer().getScheduler().cancelTask(taskMap.get(event.getPlayer()).getTaskId());
+		}
+	}
+
+	@EventHandler
+	public void onRespawn(PlayerRespawnEvent event) {
+		if (event.getPlayer().hasPermission("genesis.classes.sculk")) {
+			event.getPlayer().setWalkSpeed(0);
 		}
 	}
 
@@ -91,6 +103,20 @@ public class Sculk implements Listener {
 			event.setCancelled(true);
 			event.getPlayer().playSound(event.getPlayer(), Sound.BLOCK_SCULK_CHARGE, 1.0F, 1.0F);
 			event.getPlayer().sendActionBar(Component.text("You can only eat vegetarian food."));
+		}
+	}
+
+	@EventHandler
+	public void onStealthWalk(PlayerToggleSneakEvent event) {
+		// Default sneak spead is 30% of the default speed (0.2F)
+		// 0.2F * 0.30 = 0.06F (default sneak speed)
+		// 0.2F * 0.75 = 0.15F (Swift Sneak III speed)
+		// If we set to 0.5F we can get Swift Sneak III speeds without any fuss
+		// 0.5F * 0.30 = 0.15F
+		if (event.isSneaking()) {
+			event.getPlayer().setWalkSpeed(0.5F);
+		} else {
+			event.getPlayer().setWalkSpeed(0.2F);
 		}
 	}
 }

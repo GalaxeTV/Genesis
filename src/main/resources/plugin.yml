@@ -20,16 +20,22 @@ commands:
 permissions:
   genesis.classes.skeleton:
     description: Permission indicating the player has chosen the skeleton class.
+    default: op
   genesis.classes.enderman:
     description: Permission indicating the player has chosen the enderman class.
+    default: op
   genesis.classes.phantom:
     description: Permission indicating the player has chosen the phantom class.
+    default: op
   genesis.classes.axolotl:
     description: Permission indicating the player has chosen the axolotl class.
+    default: op
   genesis.classes.sculk:
     description: Permission indicating the player has chosen the sculk class.
+    default: op
   genesis.classes.shulker:
     description: Permission indicating the player has chosen the sculk class.
+    default: op
   genesis.reload:
     description: Permission for reloading config file.
     default: op

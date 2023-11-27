@@ -1,5 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import java.util.HashMap;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -23,6 +25,11 @@ import tv.galaxe.genesis.runnable.PhantomRunnable;
 
 public class Phantom implements Listener {
 	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
+	public static RegionQuery phantomQuery;
+
+	public Phantom() {
+		phantomQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+	}
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {

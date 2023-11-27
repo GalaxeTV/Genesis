@@ -1,5 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import java.util.HashMap;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -24,6 +26,11 @@ import tv.galaxe.genesis.runnable.SkeletonRunnable;
 
 public final class Skeleton implements Listener {
 	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
+	public static RegionQuery skeletonQuery;
+
+	public Skeleton() {
+		skeletonQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+	}
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {

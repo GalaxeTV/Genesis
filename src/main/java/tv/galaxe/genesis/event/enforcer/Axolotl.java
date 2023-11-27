@@ -1,5 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import java.util.HashMap;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBar.Color;
@@ -26,7 +28,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -42,6 +43,11 @@ public class Axolotl implements Listener {
 	public static HashMap<Player, BukkitTask> abilityInactiveTaskMap = new HashMap<Player, BukkitTask>();
 	public static HashMap<Player, Integer> abilityMap = new HashMap<Player, Integer>();
 	public static HashMap<Player, BossBar> abilityBar = new HashMap<Player, BossBar>();
+	public static RegionQuery axolotlQuery;
+
+	public Axolotl() {
+		axolotlQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+	}
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
@@ -68,7 +74,6 @@ public class Axolotl implements Listener {
 		if (event.getPlayer().hasPermission("genesis.classes.axolotl")
 				&& event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
 			event.setCancelled(true);
-
 			// Create bossbar if not initialized for player
 			if (!abilityBar.containsKey(event.getPlayer())) {
 				abilityBar.put(event.getPlayer(),
@@ -145,7 +150,6 @@ public class Axolotl implements Listener {
 		if (event.getPlayer().hasPermission("genesis.classes.axolotl")) {
 			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
 					PotionEffect.INFINITE_DURATION, 0, true, false, false));
-			event.getPlayer().setWalkSpeed(0);
 		}
 	}
 
@@ -157,20 +161,6 @@ public class Axolotl implements Listener {
 			event.getPlayer().clearActivePotionEffects();
 			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
 					PotionEffect.INFINITE_DURATION, 0, true, false, false));
-		}
-	}
-
-	@EventHandler
-	public void onStealthWalk(PlayerToggleSneakEvent event) {
-		// Default sneak spead is 30% of the default speed (0.2F)
-		// 0.2F * 0.30 = 0.06F (default sneak speed)
-		// 0.2F * 0.75 = 0.15F (Swift Sneak III speed)
-		// If we set to 0.5F we can get Swift Sneak III speeds without any fuss
-		// 0.5F * 0.30 = 0.15F
-		if (event.isSneaking()) {
-			event.getPlayer().setWalkSpeed(0.5F);
-		} else {
-			event.getPlayer().setWalkSpeed(0.2F);
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package tv.galaxe.genesis.event.enforcer;
 
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import java.util.HashMap;
 import net.kyori.adventure.text.Component;
 import org.bukkit.GameMode;
@@ -31,6 +33,11 @@ import tv.galaxe.genesis.runnable.EndermanRunnable;
 public final class Enderman implements Listener {
 	private static HashMap<Player, BukkitTask> taskMap = new HashMap<Player, BukkitTask>();
 	private static HashMap<Player, Integer> cooldownMap = new HashMap<Player, Integer>();
+	public static RegionQuery endermanQuery;
+
+	public Enderman() {
+		endermanQuery = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+	}
 
 	@EventHandler
 	public void onConnect(PlayerJoinEvent event) {
