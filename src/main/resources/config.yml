@@ -1,0 +1,37 @@
+# When specifying duration there are 20 ticks in a second
+# 'max-health', 'arrow-buff', 'water-damage' values must be doubles (ex: 16.0 and not 16)
+classes:
+  skeleton:
+    max-health: 16.0
+    daylight-fire-ticks: 60
+    milk-buff:
+      duration-ticks: 300
+      amplifier: 0
+    arrow-buff: 1.0
+  enderman:
+    max-health: 20.0
+    ability-cooldown: 200
+    water-damage: 1.0
+    ranged-debuff: 2.0
+  axolotl:
+    max-health: 16.0
+    ability-charge: 200
+    ability:
+      cooldown: 200
+      slowness-level: 1
+      regen-level: 1
+    aquatic-mob-buff: 1.0
+  sculk:
+    max-health: 20.0
+    ability:
+      level-cost: 1
+      health-reward: 2.0
+    mining-fatigue-level: 1
+    slowness-level: 1
+  shulker:
+    max-health: 28.0
+    heavy-armor-slowness: 3
+  phantom:
+    max-health: 16.0
+    daylight-fire-ticks: 60
+    fall-damage-modifier: 0.48

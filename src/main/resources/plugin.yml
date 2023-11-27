@@ -1,16 +1,43 @@
-name: genesis
+name: Genesis
 version: '${version}'
 main: tv.galaxe.genesis.Core
-api-version: 1.19
-authors: [ garrettsummerfi3ld, josefbaltz ]
+api-version: 1.20
+authors: [ josefbaltz, garrettsummerfi3ld, tonyswink ]
+depend: [ LuckPerms, WorldGuard ]
 description: A Minecraft server plugin inspired by the Origins mod.
 website: https://github.com/GalaxeTV/genesis
 commands:
   genesis:
     description: Genesis Help Menu
-    usage: /genesis
+    usage: "Usage: /<command>"
     aliases: [gen, g]
-    default: true
+    permission: genesis.gui
+  genesisreload:
+    description: Reload config file
+    usage: "Usage: /<command>"
+    default: op
+    permission: genesis.reload
 permissions:
-  genesis.genus.skeleton:
-    description: Permission indicating the player has chosen the skeleton genus.
+  genesis.gui:
+    description: Permission allowing the player to choose a new class.
+  genesis.classes.skeleton:
+    description: Permission indicating the player has chosen the skeleton class.
+    default: op
+  genesis.classes.enderman:
+    description: Permission indicating the player has chosen the enderman class.
+    default: op
+  genesis.classes.phantom:
+    description: Permission indicating the player has chosen the phantom class.
+    default: op
+  genesis.classes.axolotl:
+    description: Permission indicating the player has chosen the axolotl class.
+    default: op
+  genesis.classes.sculk:
+    description: Permission indicating the player has chosen the sculk class.
+    default: op
+  genesis.classes.shulker:
+    description: Permission indicating the player has chosen the sculk class.
+    default: op
+  genesis.reload:
+    description: Permission for reloading config file.
+    default: op

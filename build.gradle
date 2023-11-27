@@ -10,10 +10,13 @@ version = '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     maven { url = "https://repo.papermc.io/repository/maven-public/" }
+    maven { url = "https://maven.enginehub.org/repo/" }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT"
+    compileOnly "com.sk89q.worldguard:worldguard-bukkit:7.0.9"
+    compileOnly group: 'net.luckperms', name: 'api', version: '5.4'
     implementation "dev.triumphteam:triumph-gui:3.1.7"
 }
 
