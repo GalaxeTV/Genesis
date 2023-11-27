@@ -3,7 +3,7 @@ version: '${version}'
 main: tv.galaxe.genesis.Core
 api-version: 1.20
 authors: [ josefbaltz, garrettsummerfi3ld, tonyswink ]
-depend: [ LuckPerms ]
+depend: [ LuckPerms, WorldGuard ]
 description: A Minecraft server plugin inspired by the Origins mod.
 website: https://github.com/GalaxeTV/genesis
 commands:
