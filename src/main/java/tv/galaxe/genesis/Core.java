@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tv.galaxe.genesis.cmd.SelectGUI;
 import tv.galaxe.genesis.event.enforcer.Axolotl;
 import tv.galaxe.genesis.event.enforcer.Enderman;
+import tv.galaxe.genesis.event.enforcer.Human;
 import tv.galaxe.genesis.event.enforcer.Phantom;
 import tv.galaxe.genesis.event.enforcer.Sculk;
 import tv.galaxe.genesis.event.enforcer.Shulker;
@@ -46,6 +47,7 @@ public final class Core extends JavaPlugin implements Listener {
 		});
 
 		// Class Enforcers
+		getServer().getPluginManager().registerEvents(new Human(), this);
 		getServer().getPluginManager().registerEvents(new Skeleton(), this);
 		getServer().getPluginManager().registerEvents(new Enderman(), this);
 		getServer().getPluginManager().registerEvents(new Phantom(), this);
