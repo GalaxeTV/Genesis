@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.scheduler.BukkitTask;
 import tv.galaxe.genesis.Core;
 import tv.galaxe.genesis.runnable.SculkRunnable;
@@ -126,6 +127,13 @@ public class Sculk implements Listener {
 			} else {
 				event.getPlayer().setWalkSpeed(0.2F);
 			}
+		}
+	}
+
+	@EventHandler
+	public void onLeaveVehicle(VehicleExitEvent event) {
+		if (event.getExited().hasPermission("genesis.classes.sculk")) {
+			((Player) event.getExited()).setWalkSpeed(0.2F);
 		}
 	}
 }
