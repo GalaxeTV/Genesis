@@ -15,9 +15,8 @@ classes:
     ranged-debuff: 2.0
   axolotl:
     max-health: 16.0
-    ability-charge: 200
     ability:
-      cooldown: 200
+      charge: 200
       slowness-level: 1
       regen-level: 1
     aquatic-mob-buff: 1.0

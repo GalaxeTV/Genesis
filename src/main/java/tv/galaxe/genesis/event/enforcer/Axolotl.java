@@ -54,7 +54,7 @@ public class Axolotl implements Listener {
 				Core.plugin.getServer().getScheduler().runTaskTimer(Core.plugin, new AxolotlRunnable(player), 0, 20));
 		player.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
 				.setBaseValue(Core.plugin.getConfig().getDouble("classes.axolotl.max-health"));
-		abilityMap.put(player, Core.plugin.getConfig().getInt("classes.axolotl.ability-charge"));
+		abilityMap.put(player, Core.plugin.getConfig().getInt("classes.axolotl.ability.charge"));
 		player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, PotionEffect.INFINITE_DURATION, 0,
 				true, false, false));
 	}
@@ -66,7 +66,7 @@ public class Axolotl implements Listener {
 					new AxolotlRunnable((Player) event.getPlayer()), 0, 20));
 			event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH)
 					.setBaseValue(Core.plugin.getConfig().getDouble("classes.axolotl.max-health"));
-			abilityMap.put(event.getPlayer(), Core.plugin.getConfig().getInt("classes.axolotl.ability-charge"));
+			abilityMap.put(event.getPlayer(), Core.plugin.getConfig().getInt("classes.axolotl.ability.charge"));
 			event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
 					PotionEffect.INFINITE_DURATION, 0, true, false, false));
 		}
