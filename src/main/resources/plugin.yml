@@ -17,6 +17,10 @@ commands:
     usage: "Usage: /<command>"
     default: op
     permission: genesis.reload
+  genesisreset:
+    description: Reset class back to default
+    usage: "Usage: /<command>"
+    aliases: [genreset, greset]
 permissions:
   genesis.gui:
     description: Permission allowing the player to choose a new class.

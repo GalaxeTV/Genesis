@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import tv.galaxe.genesis.cmd.ResetClass;
 import tv.galaxe.genesis.cmd.SelectGUI;
 import tv.galaxe.genesis.event.enforcer.Axolotl;
 import tv.galaxe.genesis.event.enforcer.Enderman;
@@ -39,6 +40,7 @@ public final class Core extends JavaPlugin implements Listener {
 
 		// Commands
 		getCommand("genesis").setExecutor(new SelectGUI());
+		getCommand("genesisreset").setExecutor(new ResetClass());
 		getCommand("genesisreload").setExecutor(new CommandExecutor() {
 			public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 				reloadConfig();

@@ -31,6 +31,6 @@ public class AxolotlAbilityActiveRunnable implements Runnable {
 		// Update charge and update bossbar
 		Axolotl.abilityMap.put(player, Axolotl.abilityMap.get(player) - 1);
 		Axolotl.abilityBar.get(player).progress((float) (Axolotl.abilityMap.get(player)
-				/ Core.plugin.getConfig().getDouble("classes.axolotl.ability.cooldown")));
+				/ Core.plugin.getConfig().getDouble("classes.axolotl.ability.charge")));
 	}
 }

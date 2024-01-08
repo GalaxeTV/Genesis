@@ -9,6 +9,7 @@ public class Human implements Listener {
 
 	public static void newUser(Player player) {
 		player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
+		player.clearActivePotionEffects();
 	}
 
 	public static void onConnect(PlayerJoinEvent event) {

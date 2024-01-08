@@ -14,7 +14,7 @@ public class AxolotlAbilityInactiveRunnable implements Runnable {
 	@Override
 	public void run() {
 		// Check if at max ability points
-		if (Axolotl.abilityMap.get(player) >= Core.plugin.getConfig().getInt("classes.axolotl.ability.cooldown") - 1) {
+		if (Axolotl.abilityMap.get(player) >= Core.plugin.getConfig().getInt("classes.axolotl.ability.charge") - 1) {
 			// Hide boss bar
 			player.hideBossBar(Axolotl.abilityBar.get(player));
 			// Temporarily store taskID to cancel runnable after removing from map.
@@ -26,6 +26,6 @@ public class AxolotlAbilityInactiveRunnable implements Runnable {
 		// Increase charge and update bossbar
 		Axolotl.abilityMap.put(player, Axolotl.abilityMap.get(player) + 1);
 		Axolotl.abilityBar.get(player).progress((float) (Axolotl.abilityMap.get(player)
-				/ Core.plugin.getConfig().getDouble("classes.axolotl.ability.cooldown")));
+				/ Core.plugin.getConfig().getDouble("classes.axolotl.ability.charge")));
 	}
 }
