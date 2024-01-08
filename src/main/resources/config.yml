@@ -29,7 +29,7 @@ classes:
     slowness-level: 1
   shulker:
     max-health: 28.0
-    heavy-armor-slowness: 3
+    heavy-armor-slowness: 200
   phantom:
     max-health: 16.0
     daylight-fire-ticks: 60
