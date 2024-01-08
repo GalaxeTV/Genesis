@@ -268,7 +268,7 @@ public class SelectGUI implements CommandExecutor {
 		// spotless:off
 		wrongSizeMeta.lore(List.of(
 				Component.text("Deal less damage with ranged weapons.").decoration(TextDecoration.ITALIC, false), 
-				Component.text("+" + (((int) Core.plugin.getConfig().getDouble("classes.enderman.ranged-debuff") * 2))
+				Component.text("-" + (((int) Core.plugin.getConfig().getDouble("classes.enderman.ranged-debuff") * 2))
 						+ " attack damage with bows and crossbows.").decoration(TextDecoration.ITALIC, false)));
 		// spotless:on
 		wrongSize.setItemMeta(wrongSizeMeta);
