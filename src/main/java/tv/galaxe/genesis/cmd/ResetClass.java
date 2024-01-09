@@ -32,7 +32,13 @@ public class ResetClass implements CommandExecutor {
 			sender.sendMessage("This command must be used as a player!");
 			return true;
 		}
-		Core.lp.getUserManager().modifyUser(((Player) sender).getUniqueId(), (User user) -> {
+
+        if (!args[0].equalsIgnoreCase("confirm")) {
+            sender.sendMessage("This command will kick you from the server to finalize the changes. Please confirm this by running /greset confirm");
+            return true;
+        }
+
+    	Core.lp.getUserManager().modifyUser(((Player) sender).getUniqueId(), (User user) -> {
 			user.data().add(disableEndermanNode);
 			user.data().add(disableSkeletonNode);
 			user.data().add(disablePhantomNode);
