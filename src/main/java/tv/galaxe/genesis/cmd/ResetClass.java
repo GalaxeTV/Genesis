@@ -33,7 +33,7 @@ public class ResetClass implements CommandExecutor {
 			return true;
 		}
 
-		if (!args[0].equalsIgnoreCase("confirm")) {
+		if (args.length == 0 || !args[0].equalsIgnoreCase("confirm")) {
 			sender.sendMessage(
 					"This command will kick you from the server to finalize the changes. Please confirm this by running /greset confirm");
 			return true;

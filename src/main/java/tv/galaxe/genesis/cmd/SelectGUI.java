@@ -511,7 +511,7 @@ public class SelectGUI implements CommandExecutor {
 		// Phantom
 		// Phantom Head
 		ItemStack phantom = createHead("7e95153ec23284b283f00d19d29756f244313a061b70ac03b97d236ee57bd982");
-		ItemMeta phantomMeta = sculk.getItemMeta();
+		ItemMeta phantomMeta = phantom.getItemMeta();
 		phantomMeta.displayName(Component.text("Phantom Class").decoration(TextDecoration.ITALIC, false));
 		phantom.setItemMeta(phantomMeta);
 		GuiItem phantomGuiItem = new GuiItem(phantom, event -> {
