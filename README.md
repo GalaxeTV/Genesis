@@ -1,7 +1,5 @@
 # Genesis
 
-# GalaxeSMP
-
 A plugin inspired by the Origins mod for Fabric, but for Paper.
 
 Compatible on Paper 1.20.2+
